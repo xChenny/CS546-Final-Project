@@ -1,0 +1,20 @@
+{
+  "name": "final-proj",
+  "version": "1.0.0",
+  "description": "## Group Members",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xChenny/CS546-Final-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xChenny/CS546-Final-Project/issues"
+  },
+  "homepage": "https://github.com/xChenny/CS546-Final-Project#readme"
+}
