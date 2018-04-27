@@ -1,15 +1,13 @@
 const express = require("express");
-const router = expres.Router();
+const router = express.Router();
 const { createUser, validateUser } = require("../db/users");
 
-const authenticate = request => {
-  const username = request.body.username;
-  const password = request.body.password;
-};
-
-router.get("/", (req, res) => {
-  // Logic
-  res.redirect("/home");
+router.post("/", (req, res) => {
+  // Auth Logic
+  const user = req.body.username;
+  const passwd = req.body.password;
+  if (validateUser(user, passwd)) res.redirect("/home");
+  else res.send("Invalid Username/Password combination!");
 });
 
 module.exports = router;
