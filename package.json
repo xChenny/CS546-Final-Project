@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/xChenny/CS546-Final-Project#readme",
   "dependencies": {
+    "bcrypt": "^2.0.1",
     "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",
     "eslint": "^4.19.1",
@@ -25,6 +26,7 @@
     "mongo": "^0.1.0",
     "morgan": "^1.9.0",
     "nodemon": "^1.17.3",
-    "passport": "^0.4.0"
+    "passport": "^0.4.0",
+    "uuid": "^3.2.1"
   }
 }
