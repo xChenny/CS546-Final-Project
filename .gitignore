@@ -1,9 +1,7 @@
 /ui
 
-
 # Created by https://www.gitignore.io/api/node
 
-### Node ###
 # Logs
 logs
 *.log
