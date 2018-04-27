@@ -39,7 +39,7 @@ const validateUser = async (username, password) => {
   // Fetch user info
   const collection = await users();
   const result = await collection.findOne({ username });
-  if (result === null) throw "User doesnt exist!";
+  if (result === null) return false;
 
   const valid = await bcrypt.compare(password, result.hPass);
   return valid;
