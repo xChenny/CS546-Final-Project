@@ -45,14 +45,6 @@ const validateUser = async (username, password) => {
   return valid;
 };
 
-const main = async () => {
-  console.log(
-    await createUser("testUser", "password").catch(e => console.log(e))
-  );
-};
-
-main();
-
 module.exports = {
   createUser,
   validateUser
