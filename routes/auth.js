@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { createUser, validateUser } = require("../db/users");
+const { validateUser } = require("../db/users");
 const passport = require("passport");
 
 router.post("/", async (req, res) => {

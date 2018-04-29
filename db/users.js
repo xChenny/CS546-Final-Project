@@ -1,18 +1,17 @@
-const uuid = require("uuid/v4");
-const { users } = require("./mongoCollection");
-const cn = require("./mongoConnection");
-const bcrypt = require("bcrypt");
+const uuid = require('uuid/v4');
+const { users } = require('./mongoCollection');
+// const cn = require('./mongoConnection');
+const bcrypt = require('bcrypt');
 
 const createUser = async (username, password) => {
   // Valiadate arguments
-  if (!username || !password) throw "Missing arguments";
-  if (typeof username !== "string" || typeof password !== "string")
-    throw "Invalid argument type(s)";
+  if (!username || !password) throw 'Missing arguments';
+  if (typeof username !== 'string' || typeof password !== 'string') { throw 'Invalid argument type(s)'; }
 
   // Check for existing user
   const collection = await users();
   const result = await collection.findOne({ username });
-  if (result !== null) throw "User already exists!";
+  if (result !== null) return false;
 
   // Generate document
   const _id = uuid();
@@ -20,21 +19,24 @@ const createUser = async (username, password) => {
   const doc = {
     _id,
     username,
-    hPass: hashPassword
+    hPass: hashPassword,
   };
 
   // Insert doc
   const info = await collection.insertOne(doc);
-  if (info.result.ok !== 1) throw "Could not add user!";
-
+  if (info.result.ok !== 1) throw 'Could not add user!';
   return doc;
 };
 
+const main = async () => {
+    console.log(await createUser('test', 'test'))
+}
+main()
+
 const validateUser = async (username, password) => {
   // Valiadate arguments
-  if (!username || !password) throw "Missing arguments";
-  if (typeof username !== "string" || typeof password !== "string")
-    throw "Invalid argument type(s)";
+  if (!username || !password) throw 'Missing arguments';
+  if (typeof username !== 'string' || typeof password !== 'string') { throw 'Invalid argument type(s)'; }
 
   // Fetch user info
   const collection = await users();
@@ -47,5 +49,5 @@ const validateUser = async (username, password) => {
 
 module.exports = {
   createUser,
-  validateUser
-}
+  validateUser,
+};
