@@ -2,10 +2,14 @@ const express = require("express");
 const router = express.Router();
 
 const AWS = require("aws-sdk");
-AWS.config.loadFromPath("../config.json");
+AWS.config.loadFromPath("config.json");
 const s3 = new AWS.S3();
-const params = { Bucket: "codoc-data" };
-let s3Bucket = new AWS.S3({ params });
+const params = {
+    Bucket: "codoc-data"
+};
+let s3Bucket = new AWS.S3({
+    params
+});
 
 // router.post("/", upload.single("file"), async (req, res) => {
 //   const data = {
@@ -24,17 +28,22 @@ let s3Bucket = new AWS.S3({ params });
 // });
 
 router.get("/all", async (req, res) => {
-  const urlParams = { Bucket: "not-kickstarter", Key: req.params.id };
-  s3Bucket.getSignedUrl("getObject", urlParams, function(err, url) {
-    res.json([url]);
-  });
+    const urlParams = {
+        Bucket: "not-kickstarter"
+    };
+    s3Bucket.getSignedUrl("getObject", urlParams, function(err, url) {
+        res.json([url]);
+    });
 });
 
 router.get("/:id", async (req, res) => {
-  const urlParams = { Bucket: "not-kickstarter", Key: req.params.id };
-  s3Bucket.getSignedUrl("getObject", urlParams, function(err, url) {
-    res.json([url]);
-  });
+    const urlParams = {
+        Bucket: "not-kickstarter",
+        Key: req.params.id
+    };
+    s3Bucket.getSignedUrl("getObject", urlParams, function(err, url) {
+        res.json([url]);
+    });
 });
 
 module.exports = router
