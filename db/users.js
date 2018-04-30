@@ -31,7 +31,7 @@ const createUser = async (username, password) => {
 const main = async () => {
     console.log(await createUser('test', 'test'))
 }
-main()
+//main()
 
 const validateUser = async (username, password) => {
   // Valiadate arguments
