@@ -29,7 +29,7 @@ let s3Bucket = new AWS.S3({
 
 router.get("/all", async (req, res) => {
     const urlParams = {
-        Bucket: "not-kickstarter"
+        Bucket: "codoc-data",
     };
     s3Bucket.getSignedUrl("getObject", urlParams, function(err, url) {
         res.json([url]);
@@ -38,7 +38,7 @@ router.get("/all", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     const urlParams = {
-        Bucket: "not-kickstarter",
+        Bucket: "codoc-data",
         Key: req.params.id
     };
     s3Bucket.getSignedUrl("getObject", urlParams, function(err, url) {
