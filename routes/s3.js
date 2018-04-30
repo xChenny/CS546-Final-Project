@@ -30,9 +30,10 @@ let s3Bucket = new AWS.S3({
 router.get("/all", async (req, res) => {
     const urlParams = {
         Bucket: "codoc-data",
+        Prefix: "testUser-"
     };
-    s3Bucket.getSignedUrl("getObject", urlParams, function(err, url) {
-        res.json([url]);
+    s3Bucket.listObjects(urlParams, function(err, data) {
+        res.json(data.Contents);
     });
 });
 
