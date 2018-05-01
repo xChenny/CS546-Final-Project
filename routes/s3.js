@@ -26,7 +26,7 @@ let s3Bucket = new AWS.S3({
 //     }
 //   });
 // });
-
+router.get("/test", (req,res) => res.json({msg: "test"}))
 router.get("/all", async (req, res) => {
     const urlParams = {
         Bucket: "codoc-data",
