@@ -11,7 +11,7 @@ router.post('/user', async (req, res) => {
 router.post('/file', async (req, res) => {
   const fileName = req.body.fileName
   console.log(fileName);
-  res.redirect(`/editor/${fileName}`);
+  app.post(`/s3/${fileName}`);
 })
 
 module.exports = router
