@@ -42,10 +42,24 @@ router.get("/:id", async (req, res) => {
     Bucket: "codoc-data",
     Key: req.params.id
   };
-  // console.log(req.params.id);
   s3Bucket.getObject(objectParams, function(err, data) {
     if (err) res.json(err);
     res.json(data.Body.toString("ascii"));
+  });
+});
+
+router.post("/:id", async (req, res) => {
+  let objectParams = {
+    Bucket: "codoc-data",
+    Key: req.params.id
+  };
+  s3Bucket.getObject(objectParams, function(err, data) {
+    if (err) res.json(err);
+    objectParams.Body = req.body.text;
+    s3Bucket.putObject(objectParams, function(err, data) {
+      if (err) res.json(err);
+      else res.json(data);
+    });
   });
 });
 
