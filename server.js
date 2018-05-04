@@ -1,18 +1,18 @@
-const express = require("express");
-const morgan = require("morgan");
-const routes = require("./routes");
-const bodyParser = require("body-parser");
+const express = require('express')
+const morgan = require('morgan')
+const routes = require('./routes')
+const bodyParser = require('body-parser')
 
-const app = express();
-app.use(morgan("short"));
-app.use(bodyParser.json());
-app.use(bodyParser.raw());
+const app = express()
+app.use(morgan('short'))
+app.use(bodyParser.json())
+app.use(bodyParser.raw())
 app.use(bodyParser.urlencoded({
-    extended: false
-}));
+  extended: false
+}))
 
-routes(app);
+routes(app)
 
 app.listen(5500, () => {
-    console.log("App is running on port 5500");
-});
+  console.log('App is running on port 5500')
+})
