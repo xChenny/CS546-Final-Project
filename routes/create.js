@@ -8,10 +8,4 @@ router.post('/user', async (req, res) => {
   if (await createUser(user, pass)) { res.redirect('http://localhost:3000/dashboard') } else { res.redirect('http://localhost:3000/signup') }
 })
 
-router.post('/file', async (req, res) => {
-  const fileName = req.body.fileName
-  console.log(fileName);
-  app.post(`/s3/${fileName}`);
-})
-
 module.exports = router
