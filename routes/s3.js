@@ -60,4 +60,15 @@ router.post('/:id', async (req, res) => {
   })
 })
 
+router.post('/delete/:id', async (req, res) => {
+  let objectParams = {
+    Bucket: 'codoc-data',
+    Key: req.params.id
+  }
+  s3Bucket.deleteObject(objectParams, function (err, data) {
+    if (err) res.send(false)
+    res.send(true)
+  })
+})
+
 module.exports = router
