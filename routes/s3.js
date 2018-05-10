@@ -5,6 +5,7 @@ const path = require("path");
 const AWS = require("aws-sdk");
 
 // Init Storage configuration for multer (file upload)
+
 // const storage = multer.diskStorage({
 //   destination: "uploads/",
 //   filename: function(req, file, cb) {
@@ -14,8 +15,10 @@ const AWS = require("aws-sdk");
 //     );
 //   }
 // });
-const storage = multer.memoryStorage()
-// 'file' is the 'name' of the axios body input in fileupload/index.js 
+
+// Just use memorystorage for now.
+const storage = multer.memoryStorage();
+// 'file' is the 'name' of the axios body input in fileupload/index.js
 let upload = multer({
   storage,
   limits: {
@@ -41,6 +44,17 @@ router.get("/all", async (req, res) => {
   });
 });
 
+// get an image's url from S3
+router.get("/image/:id", async (req, res) => {
+  const objectParams = {
+    Bucket: "codoc-data",
+    Key: `${req.params.id}`
+  };
+  s3Bucket.getSignedUrl("getObject", objectParams, function(err, url) {
+    res.send(url);
+  });
+});
+
 // Get the contents of a specific file from S3 so we can populate the editor
 router.get("/:id", async (req, res) => {
   const objectParams = {
@@ -53,8 +67,21 @@ router.get("/:id", async (req, res) => {
   });
 });
 
+// Upload empty files or save files to S3
+router.post("/:id", (req, res) => {
+  let objectParams = {
+    Bucket: "codoc-data",
+    Key: req.params.id
+  };
+  if (req.body.text) objectParams.Body = req.body.text;
+  s3Bucket.putObject(objectParams, function(err, data) {
+    if (err) res.json(err);
+    res.send(data);
+  });
+});
+
 // Upload files to S3 with multer middleware
-router.post("/:id", async (req, res) => {
+router.post("/upload/:id", async (req, res) => {
   upload(req, res, err => {
     if (err) {
       res.send(err);
