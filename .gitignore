@@ -1,4 +1,6 @@
 /ui
+/uploads/*
+!/uploads/README.md
 config.json
 
 # Created by https://www.gitignore.io/api/node

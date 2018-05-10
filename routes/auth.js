@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { validateUser } = require('../db/users')
 
+// Authenticate users
 router.post('/', async (req, res) => {
   // Auth Logic
   const user = req.body.username

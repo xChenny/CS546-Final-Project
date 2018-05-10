@@ -3,6 +3,7 @@ const auth = require('./auth')
 const create = require('./create')
 const s3 = require('./s3')
 
+// Router combiner: Joins all routers to create the backend
 const routes = app => {
   app.use('/login', auth)
   app.use('/create', create)
