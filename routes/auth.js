@@ -8,8 +8,10 @@ router.post('/', async (req, res) => {
   const user = req.body.username
   const passwd = req.body.password
   if (await validateUser(user, passwd)) {
-    req.session.user = user
-    console.log(req.session)
+    console.log(req.cookies)
+    res.clearCookie("user")
+    res.clearCookie("loggedOut")
+    res.cookie("user", user, { maxAge: 900000, httpOnly: true })
     res.send(true)
   } else {
     res.send(false)

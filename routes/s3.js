@@ -34,6 +34,7 @@ let s3Bucket = new AWS.S3({ params });
 // Grab all file urls from AWS S3 belonging to current user
 // TODO: Make cookies work so that we can parse which files belong to this user
 router.get("/all", async (req, res) => {
+  console.log("cookies: ", req.cookies)
   const urlParams = {
     Bucket: "codoc-data"
     // Prefix: 'testUser-'
@@ -67,18 +68,10 @@ router.get("/:id", async (req, res) => {
   });
 });
 
-// Upload empty files or save files to S3
-router.post("/:id", (req, res) => {
-  let objectParams = {
-    Bucket: "codoc-data",
-    Key: req.params.id
-  };
-  if (req.body.text) objectParams.Body = req.body.text;
-  s3Bucket.putObject(objectParams, function(err, data) {
-    if (err) res.json(err);
-    res.send(data);
-  });
-});
+// dummy route for filepond to get a response
+router.post('/dummy/dummy', (req, res) => {
+  res.send('dummy')
+})
 
 // Upload files to S3 with multer middleware
 router.post("/upload/:id", async (req, res) => {
@@ -96,6 +89,19 @@ router.post("/upload/:id", async (req, res) => {
         res.send(req.file);
       });
     }
+  });
+});
+
+// Upload empty files or save files to S3
+router.post("/:id", (req, res) => {
+  let objectParams = {
+    Bucket: "codoc-data",
+    Key: req.params.id
+  };
+  if (req.body.text) objectParams.Body = req.body.text;
+  s3Bucket.putObject(objectParams, function(err, data) {
+    if (err) res.json(err);
+    res.send(data);
   });
 });
 
