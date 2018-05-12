@@ -43,10 +43,8 @@ let s3Bucket = new AWS.S3({ params });
 // Grab all file urls from AWS S3 belonging to current user
 // TODO: Make cookies work so that we can parse which files belong to this user
 router.get("/all", async (req, res) => {
-  console.log("cookies: ", req.cookies);
   const urlParams = {
     Bucket: "codoc-data1"
-    // Prefix: 'testUser-'
   };
   s3Bucket.listObjects(urlParams, function(err, data) {
     if (err) res.json(err);
@@ -56,28 +54,28 @@ router.get("/all", async (req, res) => {
 
 // get an image's url from S3
 router.get("/image/:id", async (req, res) => {
-  const objectParams = {
+  let objectParams = {
     Bucket: "codoc-data1",
     Key: `${req.params.id}`
   };
   const ext = getExtension(req.params.id);
-  // if (ext === "pdf") {
-  //   // pdfs need to be handled differently
-  //   s3Bucket.getObject(objectParams, function(err, data) {
-  //     if (err) res.json(err);
-  //     else {
-  //       res.send(data);
-  //     }
-  //   });
-  // } else {
-  // images/videos/gifs etc
-  s3Bucket.getSignedUrl("getObject", objectParams, function(err, url) {
-    res.set("Content-Type", "application/pdf");
-    res.set(`Content-Disposition: inline; filename=${req.params.id}`);
-    console.log(url);
-    res.send(url);
-  });
-  // }
+  if (ext === "pdf") {
+    objectParams = Object.assign(objectParams, { Range: "bytes=0-9" });
+    // pdfs need to be handled differently
+    s3Bucket.getObject(objectParams, function(err, data) {
+      if (err) res.json(err);
+      else {
+        res.send(data);
+      }
+    });
+  } else {
+    // images/videos/gifs etc
+    s3Bucket.getSignedUrl("getObject", objectParams, function(err, url) {
+      res.set("Content-Type", "application/pdf");
+      res.set(`Content-Disposition: inline; filename=${req.params.id}`);
+      res.send(url);
+    });
+  }
 });
 
 // Get the contents of a specific file from S3 so we can populate the editor

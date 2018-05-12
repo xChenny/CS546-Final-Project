@@ -14,11 +14,11 @@ Keith Morel
 
 `git clone https://github.com/xchenny/CS546-Final-Project.git`
 
-2. Clone the frontend repository inside of this directory
+2. Clone the frontend repository inside of this directory and rename it to 'ui'
 
 `cd CS546-Final-Project`
 
-`git clone https://github.com/xChenny/CS546-FP-Frontend.git`
+`git clone https://github.com/xChenny/CS546-FP-Frontend.git ui`
 
 3. Start the development script in the outside "server" directory
 

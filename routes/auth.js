@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
   const user = req.body.username
   const passwd = req.body.password
   if (await validateUser(user, passwd)) {
-    console.log(req.cookies)
+    // console.log(req.cookies)
     res.clearCookie("user")
     res.clearCookie("loggedOut")
     res.cookie("user", user, { maxAge: 900000, httpOnly: true })
