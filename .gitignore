@@ -2,6 +2,8 @@
 /uploads/*
 !/uploads/README.md
 config.json
+db/settings.json
+.DS_Store
 
 # Created by https://www.gitignore.io/api/node
 

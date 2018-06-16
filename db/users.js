@@ -1,10 +1,10 @@
 const uuid = require('uuid/v4');
 const { users } = require('./mongoCollection');
-// const cn = require('./mongoConnection');
+const { checkDbSize } = require("./mLab")
 const bcrypt = require('bcrypt');
 
 const createUser = async (username, password) => {
-  // Valiadate arguments
+  // Validate arguments
   if (!username || !password) throw 'Missing arguments';
   if (typeof username !== 'string' || typeof password !== 'string') { throw 'Invalid argument type(s)'; }
 
@@ -12,6 +12,8 @@ const createUser = async (username, password) => {
   const collection = await users();
   const result = await collection.findOne({ username });
   if (result !== null) return false;
+
+  await checkDbSize(collection)
 
   // Generate document
   const _id = uuid();
@@ -31,7 +33,7 @@ const createUser = async (username, password) => {
 const main = async () => {
     console.log(await createUser('test', 'test'))
 }
-//main()
+// main()
 
 const validateUser = async (username, password) => {
   // Valiadate arguments

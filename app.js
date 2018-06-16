@@ -16,6 +16,8 @@ app.use(
   })
 );
 
+app.use(express.static('./ui/build'))
+
 // Create routers/routes
 routes(app);
 

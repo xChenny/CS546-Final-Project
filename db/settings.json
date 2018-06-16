@@ -1,6 +1,0 @@
-{
-    "mongoConfig": {
-        "db": "codoc",
-        "serverUrl": "mongodb://localhost:27017"
-    }
-}
