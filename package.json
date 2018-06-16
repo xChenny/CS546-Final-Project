@@ -4,6 +4,7 @@
   "description": "Final Project for CS546 - Web development",
   "main": "index.js",
   "scripts": {
+    "start": "node app.js",
     "dev": "concurrently -n SERVER,FRONTEND \"nodemon server.js\" \"cd ui && npm run start\""
   },
   "repository": {
