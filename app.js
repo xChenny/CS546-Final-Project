@@ -21,6 +21,6 @@ app.use(express.static('./ui/build'))
 // Create routers/routes
 routes(app);
 
-app.listen(5500, () => {
-  console.log("App is running on port 5500");
+app.listen(8080, () => {
+  console.log("App is running on port 8080");
 });
