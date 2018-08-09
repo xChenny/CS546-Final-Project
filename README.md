@@ -1,5 +1,15 @@
 # CS-546 Web Development Final Project
 
+CodeJS is an online code editor and file storage platform geared towards programmers! We created this project as a Final project in the Web development class we are a part of.
+
+CodeJS utilizes the following technologies:
+
+- **AWS S3**: File storage
+- **NodeJS**: Backend
+- **MongoDB**: Store User Data for Authentication
+- **ReactJS**: Frontend, in conjunction with Redux
+- ... and many, many, other npm packages
+
 ## Group Members
 
 Andrew Chen
