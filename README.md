@@ -2,6 +2,10 @@
 
 CodeJS is an online code editor and file storage platform geared towards programmers! We created this project as a Final project in the Web development class we are a part of.
 
+Check it out [here!](https://codejs-editor.appspot.com)
+
+**Note that the web app may not be online 24/7 due to the limitations of the hosting plan it is on. Sorry for the inconvenience!**
+
 CodeJS utilizes the following technologies:
 
 - **AWS S3**: File storage
